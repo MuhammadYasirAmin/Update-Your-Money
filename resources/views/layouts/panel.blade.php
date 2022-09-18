@@ -39,8 +39,9 @@
 </head>
 
 <body>
+
     <!-- ==== topbar start ==== -->
-    <div class="topbar d-none d-lg-block">
+    <div class="topbar topbar__dashboard d-none d-lg-block">
         <div class="container">
             <div class="topbar__area">
                 <div class="row">
@@ -83,16 +84,81 @@
     <!-- ==== topbar end ==== -->
 
     <!-- ==== header start ==== -->
-    <header>
+    <header class="header__dashboard header__alt">
         <nav class="navbar navbar-expand-xl">
             <div class="container">
                 <a class="navbar-brand" href="/">
                     <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="logo" />
                 </a>
                 <div class="navbar__out order-2 order-xl-3">
-                    <div class="nav__group__btn">
-                        <a href="/Authentication/LoginForm" class="button active__btn d-none d-sm-block"> Log In </a>
-                        <a href="/Authentication/Registeration" class="button d-none d-sm-block"> Sign Up </a>
+                    <div class="dashboard__nav">
+                        <div class="messages">
+                            <a href="javascript:void(0)" class="message__icon__wrapper">
+                                <i class="fas fa-envelope"></i>
+                                <span>03</span>
+                            </a>
+                            <div class="message__wrapper">
+                                <div class="message__head">
+                                    <p class="text-center">3 New</p>
+                                    <p class="tertiary text-center">User Tickets</p>
+                                </div>
+                                <div class="message__single">
+                                    <p class="tertiary text-center mb-20">There are no open tickets</p>
+                                    <h6 class="text-center">Do you need help?</h6>
+                                    <a href="#">Create a new tickets</a>
+                                </div>
+                                <div class="mark__read">
+                                    <a href="#">View All Tickets</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notifications">
+                            <a href="javascript:void(0)" class="icon__wrapper">
+                                <i class="fas fa-bell"></i>
+                                <span>03</span>
+                            </a>
+                            <div class="notification__wrapper">
+                                <div class="notification__head">
+                                    <p class="text-center">3 New</p>
+                                    <p class="tertiary text-center">Notification</p>
+                                </div>
+                                <div class="notification__single">
+                                    <a href="#">
+                                        <h6>Welcome to spoment</h6>
+                                        <p class="tertiary">We are happy to welcome you to our community spoment.</p>
+                                    </a>
+                                    <p class="tertiary time">2 hours ago</p>
+                                </div>
+                                <div class="mark__read">
+                                    <a href="#">Mark all as read</a>
+                                </div>
+                            </div>
+                        </div>
+                        <select class="language-select">
+                            <option value="english">En</option>
+                            <option value="australia">Aus</option>
+                            <option value="brazil">Bra</option>
+                            <option value="argentina">Arg</option>
+                        </select>
+                        <div class="profile__meta">
+                            <a href="javascript:void(0)" class="profile__small">
+                                <img src="{{ asset('assets/images/avatar.png') }}" alt="Profile Image" />
+                            </a>
+                            <div class="profile__info">
+                                <div class="profile__info__head">
+                                    <div>
+                                        <img src="{{ asset('assets/images/avatar.png') }}" alt="User" />
+                                    </div>
+                                    <div class="profile__head__content">
+                                        <a href="/Authorized/User-Settings">Roger Smith</a>
+                                        <p class="tertiary"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f5879a929087cdc1b59298949c99db969a98">[email&#160;protected]</a></p>
+                                    </div>
+                                </div>
+                                <a href="/Authorized/User-Settings">Personal Info</a>
+                                <a href="/Authorized/User-Settings">Payout Settings</a>
+                                <a href="#">Logout</a>
+                            </div>
+                        </div>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNav"
                         aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle Primary Nav">
@@ -131,7 +197,92 @@
     </header>
     <!-- ==== #header end ==== -->
 
-    {{ $slot }}
+    <!-- ==== dashboard section start ==== -->
+    <div class="dashboard section__space__bottom">
+        <div class="container">
+            <div class="dashboard__area">
+                <div class="row">
+                    <div class="col-xxl-3">
+                        <div class="sidebar">
+                            <a href="javascript:void(0)" class="close__sidebar">
+                                <i class="fas fa-times"></i>
+                            </a>
+                            <div class="sidenav__wrapper">
+                                <ul>
+                                    <li>
+                                        <a href="/Authorized/User-Dashboard" class="sidenav__active">
+                                            <img src="{{ asset('assets/images/icons/dashboard.png') }}" alt="dashboard" /> Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-Deposit">
+                                            <img src="{{ asset('assets/images/icons/deposit.png') }}" alt="Deposit" /> Deposit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-Withdrawal">
+                                            <img src="{{ asset('assets/images/icons/withdraw.png') }}" alt="Withdrawal" /> Withdrawal
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-Investment">
+                                            <img src="{{ asset('assets/images/icons/investment.png') }}" alt="Investment" /> My
+                                            Investments
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-Affilates">
+                                            <img src="{{ asset('assets/images/icons/affiliate.png') }}" alt="Affiliate Program" />
+                                            Affiliate Program
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-Wallet">
+                                            <img src="{{ asset('assets/images/icons/wallets.png') }}" alt="Wallets" /> Wallets
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-History">
+                                            <img src="{{ asset('assets/images/icons/history.png') }}" alt="History" /> History
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Authorized/User-Settings">
+                                            <img src="{{ asset('assets/images/icons/settings.png') }}" alt="Settings" /> Settings
+                                        </a>
+                                    </li>
+                                </ul>
+                                <hr />
+                                <ul class="logout">
+                                    <li>
+                                        <a href="#">
+                                            <img src="{{ asset('assets/images/icons/logout.png') }}" alt="Logout" /> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sidenav__wrapper sidenav__footer">
+                                <h6>Last Login</h6>
+                                <hr />
+                                <div class="sidenav__time">
+                                    <p class="tertiary"><img src="{{ asset('assets/images/icons/login.png') }}" alt="Login" />
+                                        02.01.2022</p>
+                                    <p class="tertiary">15:48:13</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-9">
+                        {{ $slot }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay">
+
+    </div>
+    <!-- ==== #dashboard section end ==== -->
 
     <!-- ==== footer section start ==== -->
     <footer class="footer">
@@ -143,7 +294,7 @@
                             Fantastic News</h3>
                         <p class="text-center">Subscribe to our newsletter and be the first to receive news</p>
                     </div>
-                    <form action="#" method="POST" class="subscribeForm">
+                    <form action="#" method="post" class="subscribeForm">
                         @csrf
                         <input type="email" name="subscribe" id="subscribeField" required="required"
                             placeholder="Enter your email" />

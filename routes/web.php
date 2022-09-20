@@ -62,14 +62,15 @@ Route::get('account/verify/{token}', [
     'verifyAccount',
 ])->name('user.verify');
 
-Route::get('/Authorized/User-Dashboard', Dashboard::class)->middleware([
-    'auth',
-    'is_verify_email',
-]);
-Route::get('/Authorized/User-Settings', UserSettings::class);
-Route::get('/Authorized/User-History', UserHistory::class);
-Route::get('/Authorized/User-Wallet', UserWallets::class);
-Route::get('/Authorized/User-Deposit', UserDeposit::class);
-Route::get('/Authorized/User-Withdrawal', UserWithdrawal::class);
-Route::get('/Authorized/User-Investment', UserInvestment::class);
-Route::get('/Authorized/User-Affilates', UserAffilates::class);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/Authorized/User-Dashboard', Dashboard::class)->name(
+        'User.Dashboard'
+    );
+    Route::get('/Authorized/User-Settings', UserSettings::class);
+    Route::get('/Authorized/User-History', UserHistory::class);
+    Route::get('/Authorized/User-Wallet', UserWallets::class);
+    Route::get('/Authorized/User-Deposit', UserDeposit::class);
+    Route::get('/Authorized/User-Withdrawal', UserWithdrawal::class);
+    Route::get('/Authorized/User-Investment', UserInvestment::class);
+    Route::get('/Authorized/User-Affilates', UserAffilates::class);
+});

@@ -35,6 +35,7 @@
 
     <!-- main css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 
@@ -255,7 +256,7 @@
                                 <hr />
                                 <ul class="logout">
                                     <li>
-                                        <a href="#">
+                                        <a href="/Authentication/LogOut">
                                             <img src="{{ asset('assets/images/icons/logout.png') }}" alt="Logout" /> Logout
                                         </a>
                                     </li>

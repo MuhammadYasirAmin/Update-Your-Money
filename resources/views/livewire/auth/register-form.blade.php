@@ -83,3 +83,21 @@
         </div>
     </section>
     <!-- ==== #register form end ==== -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@if (Session::has('User_Registerd'))
+    <script>
+        toastr.success("{!! Session::get('User_Registerd') !!}");
+    </script>
+@endif
+@if (Session::has('User_Not_Registerd'))
+    <script>
+        toastr.error("{!! Session::get('User_Not_Registerd') !!}");
+    </script>
+@endif

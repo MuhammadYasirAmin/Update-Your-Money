@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Session;
 use App\Models\User;
 use App\Models\UserVerify;
@@ -16,72 +17,57 @@ class AuthController extends Controller
 {
     public function loginSubmit(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+        $validator = Validator::make($request->all(), [
+            'Log_Email' => 'required|email',
+            'Log_Pass' => 'required|min:6|max:12',
         ]);
 
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()
-                ->intended('/Authorized/User-Dashboard')
-                ->withSuccess('You have Successfully loggedin');
+        if ($validator->fails()) {
+            return back()->with('User_Not_Login', 'User Validation Error!');
         }
 
-        return redirect('login')->withSuccess(
-            'Opps! You have entered invalid credentials'
-        );
+        // $credentials = array('email' => $request->Log_Email, 'password' => $request->Log_Password);
+
+        if (!Auth::attempt(array('email' => $request->Log_Email, 'password' => $request->Log_Pass))) {
+            return back()->with('User_Not_Login', 'User Not Login Successfully!');
+        }
+
+        $user = User::where('email', $request->Log_Email)->first();
+        if ($user) {
+            if (Hash::check($request->Log_Pass, $user->password)) {
+                $token = $user->createToken('LoginToken')->accessToken;
+                return redirect()->route('User.Dashboard');
+                // return back()->with('User_Login', 'User Login Successfully!');
+            } else {
+                return back()->with('User_Login', 'Password mismatch');
+            }
+        } else {
+            return back()->with('User_Login', 'User does not exist');
+        }
     }
 
     public function registerSubmit(Request $request)
     {
-        // $request->validate([
-        //     'Reg_Name' => 'required',
-        //     'Reg_Phone' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'Reg_Pass' => 'required|min:8',
-        // ]);
-
-        $data = $request->all();
-        // $data = [
-        //     [
-        //         'name' => $request->Reg_Name,
-        //         'user_phoneNumber' => $request->Reg_Name,
-        //         'email' => $request->Reg_Email,
-        //         'password' => $request->Reg_Pass,
-        //     ],
-        // ];
-        $createUser = $this->create($data);
-
-        $token = Str::random(64);
-
-        UserVerify::create([
-            'user_id' => $createUser->id,
-            'token' => $token,
+        $validator = Validator::make($request->all(), [
+            'Reg_Email' => 'required|email',
+            'Reg_Name' => 'required',
+            'Reg_Phone' => 'required',
+            'Reg_Pass' => 'required|min:6|max:12',
+            'Reg_CPass' => 'required|same:Reg_Pass|min:6|max:12',
         ]);
 
-        Mail::send(
-            'emails.emailVerificationEmail',
-            ['token' => $token],
-            function ($message) use ($request) {
-                $message->to($request->Reg_Email);
-                $message->subject('Email Verification Mail');
-            }
-        );
+        if ($validator->fails()) {
+            return back()->with('User_Not_Registerd', 'User Not Registerd Successfully!');
+        }
 
-        return redirect('/Authorized/User-Dashboard')->withSuccess(
-            'Great! You have Successfully loggedin'
-        );
-    }
+        $user = new User();
+        $user->email = $request->Reg_Email;
+        $user->name = $request->Reg_Name;
+        $user->user_phoneNumber = $request->Reg_Phone;
+        $user->password = bcrypt($request->Reg_Pass);
+        $user->save();
 
-    public function create(array $data)
-    {
-        return User::create([
-            'name' => $data['Reg_Name'],
-            'user_phoneNumber' => $data['Reg_Phone'],
-            'email' => $data['Reg_Email'],
-            'password' => Hash::make($data['Reg_Pass']),
-        ]);
+        return back()->with('User_Registerd', 'User Registerd Successfully!');
     }
 
     public function logout()
@@ -89,31 +75,7 @@ class AuthController extends Controller
         Session::flush();
         Auth::logout();
 
-        return Redirect('login');
-    }
-
-    public function verifyAccount($token)
-    {
-        $verifyUser = UserVerify::where('token', $token)->first();
-
-        $message = 'Sorry your email cannot be identified.';
-
-        if (!is_null($verifyUser)) {
-            $user = $verifyUser->user;
-
-            if (!$user->is_email_verified) {
-                $verifyUser->user->is_email_verified = 1;
-                $verifyUser->user->save();
-                $message = 'Your e-mail is verified. You can now login.';
-            } else {
-                $message =
-                    'Your e-mail is already verified. You can now login.';
-            }
-        }
-
-        return redirect()
-            ->route('login')
-            ->with('message', $message);
+        return Redirect('/Authentication/LoginForm');
     }
 }
 

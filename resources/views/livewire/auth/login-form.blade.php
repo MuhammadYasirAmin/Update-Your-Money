@@ -20,16 +20,17 @@
             <div class="register__area login__area">
                 <h3 class="content__space--small text-center">Welcome Back!</h3>
                 <p class="text-center mb-55">Enter your details below.</p>
-                <form action="#" method="POST">
+                <form action="{{ route('login.post') }}" method="POST">
+                    @csrf
                     <div class="input__area text-start content__space">
                         <label for="loginMail" class="content__space--small">Your Name</label>
-                        <input type="email" name="login__email" id="loginMail" placeholder="Enter Email"
+                        <input type="email" name="email" id="loginMail" placeholder="Enter Email"
                             required="required" />
                     </div>
                     <div class="input__area text-start content__space--small">
                         <label for="loginMail" class="content__space--small">Enter Password</label>
                         <div class="show__hide__password">
-                            <input type="password" name="login__password" id="loginPass" placeholder="Enter Password"
+                            <input type="password" name="password" id="loginPass" placeholder="Enter Password"
                                 required="required" />
                             <i class="fas fa-eye-slash login__toggle__password"></i>
                         </div>

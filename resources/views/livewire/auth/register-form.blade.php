@@ -20,21 +20,32 @@
             <div class="register__area">
                 <h3 class="content__space--small text-center">Become a New Investor</h3>
                 <p class="text-center mb-55">Become one of our investors and start making money</p>
-                <form action="#" method="POST">
+                <form action="{{ route('register.post') }}" method="POST">
                     @csrf
                     <div class="input__grp content__space">
                         <div class="row d-flex align-items-start">
                             <div class="col-md-6">
                                 <div class="input__area text-start">
                                     <label for="fullName" class="content__space--small">Your Name</label>
-                                    <input type="text" name="full__name" id="fullName" placeholder="Your Full Name"
+                                    <input type="text" name="Reg_Name" id="fullName" placeholder="Your Full Name"
                                         required="required" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input__area text-start">
-                                    <label for="userName" class="content__space--small">Your Username</label>
-                                    <input type="text" name="user__name" id="userName" placeholder="Enter Username"
+                                    <label for="userPhone" class="content__space--small">Your Phone</label>
+                                    <input type="number" name="Reg_Phone" id="userName" placeholder="Enter Phone Number"
+                                        required="required" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input__grp cta__space">
+                        <div class="row d-flex align-items-start">
+                            <div class="col-md-6">
+                                <div class="input__area text-start">
+                                    <label for="mail" class="content__space--small">Your E-mail</label>
+                                    <input type="email" name="Reg_Email" id="mail" placeholder="Your E-mail Address"
                                         required="required" />
                                 </div>
                             </div>
@@ -46,7 +57,7 @@
                                 <div class="input__area text-start">
                                     <label for="regiPass" class="content__space--small">Define Password</label>
                                     <div class="show__hide__password">
-                                        <input type="password" name="type__pass" id="regiPass"
+                                        <input type="password" name="Reg_Pass" id="regiPass"
                                             placeholder="Define Password" required="required" />
                                         <i class="fas fa-eye-slash toggle__password"></i>
                                     </div>
@@ -56,7 +67,7 @@
                                 <div class="input__area text-start">
                                     <label for="retypePass" class="content__space--small">Retype Password</label>
                                     <div class="show__hide__password">
-                                        <input type="password" name="retype__pass" id="retypePass"
+                                        <input type="password" name="Reg_CPass" id="retypePass"
                                             placeholder="Retype Password" required="required" />
                                         <i class="fas fa-eye-slash retype__toggle__password"></i>
                                     </div>
@@ -64,24 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input__grp cta__space">
-                        <div class="row d-flex align-items-start">
-                            <div class="col-md-6">
-                                <div class="input__area text-start">
-                                    <label for="mail" class="content__space--small">Your E-mail</label>
-                                    <input type="email" name="type__email" id="mail" placeholder="Your E-mail Address"
-                                        required="required" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input__area text-start">
-                                    <label for="retypeMail" class="content__space--small">Retype Your E-mail</label>
-                                    <input type="email" name="retype__mail" id="retypeMail"
-                                        placeholder="Retype Your E-mail" required="required" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <button type="submit" class="button content__space">SIGN UP</button>
                     <p class="text-center">Already have an account? <a href="/Authentication/LoginForm">LOGIN</a></p>
                 </form>

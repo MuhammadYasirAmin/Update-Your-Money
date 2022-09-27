@@ -92,75 +92,163 @@
                     <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" class="logo" />
                 </a>
                 <div class="navbar__out order-2 order-xl-3">
-                    <div class="dashboard__nav">
-                        <div class="messages">
-                            <a href="javascript:void(0)" class="message__icon__wrapper">
-                                <i class="fas fa-envelope"></i>
-                                <span>03</span>
-                            </a>
-                            <div class="message__wrapper">
-                                <div class="message__head">
-                                    <p class="text-center">3 New</p>
-                                    <p class="tertiary text-center">User Tickets</p>
-                                </div>
-                                <div class="message__single">
-                                    <p class="tertiary text-center mb-20">There are no open tickets</p>
-                                    <h6 class="text-center">Do you need help?</h6>
-                                    <a href="#">Create a new tickets</a>
-                                </div>
-                                <div class="mark__read">
-                                    <a href="#">View All Tickets</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="notifications">
-                            <a href="javascript:void(0)" class="icon__wrapper">
-                                <i class="fas fa-bell"></i>
-                                <span>03</span>
-                            </a>
-                            <div class="notification__wrapper">
-                                <div class="notification__head">
-                                    <p class="text-center">3 New</p>
-                                    <p class="tertiary text-center">Notification</p>
-                                </div>
-                                <div class="notification__single">
-                                    <a href="#">
-                                        <h6>Welcome to spoment</h6>
-                                        <p class="tertiary">We are happy to welcome you to our community spoment.</p>
-                                    </a>
-                                    <p class="tertiary time">2 hours ago</p>
-                                </div>
-                                <div class="mark__read">
-                                    <a href="#">Mark all as read</a>
-                                </div>
-                            </div>
-                        </div>
-                        <select class="language-select">
-                            <option value="english">En</option>
-                            <option value="australia">Aus</option>
-                            <option value="brazil">Bra</option>
-                            <option value="argentina">Arg</option>
-                        </select>
-                        <div class="profile__meta">
-                            <a href="javascript:void(0)" class="profile__small">
-                                <img src="{{ asset('assets/images/avatar.png') }}" alt="Profile Image" />
-                            </a>
-                            <div class="profile__info">
-                                <div class="profile__info__head">
-                                    <div>
-                                        <img src="{{ asset('assets/images/avatar.png') }}" alt="User" />
+                        @if (Route::has('login'))
+                            @auth
+                                @if (Auth::user()->utype==='ADM')
+                                    <div class="dashboard__nav">
+                                        <div class="messages">
+                                            <a href="javascript:void(0)" class="message__icon__wrapper">
+                                                <i class="fas fa-envelope"></i>
+                                                <span>03</span>
+                                            </a>
+                                            <div class="message__wrapper">
+                                                <div class="message__head">
+                                                    <p class="text-center">3 New</p>
+                                                    <p class="tertiary text-center">User Tickets</p>
+                                                </div>
+                                                <div class="message__single">
+                                                    <p class="tertiary text-center mb-20">There are no open tickets</p>
+                                                    <h6 class="text-center">Do you need help?</h6>
+                                                    <a href="#">Create a new tickets</a>
+                                                </div>
+                                                <div class="mark__read">
+                                                    <a href="#">View All Tickets</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="notifications">
+                                            <a href="javascript:void(0)" class="icon__wrapper">
+                                                <i class="fas fa-bell"></i>
+                                                <span>03</span>
+                                            </a>
+                                            <div class="notification__wrapper">
+                                                <div class="notification__head">
+                                                    <p class="text-center">3 New</p>
+                                                    <p class="tertiary text-center">Notification</p>
+                                                </div>
+                                                <div class="notification__single">
+                                                    <a href="#">
+                                                        <h6>Welcome to spoment</h6>
+                                                        <p class="tertiary">We are happy to welcome you to our community spoment.</p>
+                                                    </a>
+                                                    <p class="tertiary time">2 hours ago</p>
+                                                </div>
+                                                <div class="mark__read">
+                                                    <a href="#">Mark all as read</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select class="language-select">
+                                            <option value="english">En</option>
+                                            <option value="australia">Aus</option>
+                                            <option value="brazil">Bra</option>
+                                            <option value="argentina">Arg</option>
+                                        </select>
+                                        <div class="profile__meta">
+                                            <a href="javascript:void(0)" class="profile__small">
+                                                <img src="{{ asset('assets/images/avatar.png') }}" alt="Profile Image" />
+                                            </a>
+                                            <div class="profile__info">
+                                                <div class="profile__info__head">
+                                                    <div>
+                                                        <img src="{{ asset('assets/images/avatar.png') }}" alt="User" />
+                                                    </div>
+                                                    <div class="profile__head__content">
+                                                        <a href="/Authorized/User-Settings">{{ Auth::user()->name }}</a>
+                                                        <p class="tertiary"><a href="/cdn-cgi/l/email-protection" class="__cf_email__">{{ Auth::user()->email }}</a></p>
+                                                    </div>
+                                                </div>
+                                                <a href="/Authorized/User-Settings">Personal Info</a>
+                                                <a href="/Authorized/User-Settings">Payout Settings</a>
+                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                                <form id="logout-form" method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="profile__head__content">
-                                        <a href="/Authorized/User-Settings">Roger Smith</a>
-                                        <p class="tertiary"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f5879a929087cdc1b59298949c99db969a98">[email&#160;protected]</a></p>
+                                @else
+                                    <div class="dashboard__nav">
+                                        <div class="messages">
+                                            <a href="javascript:void(0)" class="message__icon__wrapper">
+                                                <i class="fas fa-envelope"></i>
+                                                <span>03</span>
+                                            </a>
+                                            <div class="message__wrapper">
+                                                <div class="message__head">
+                                                    <p class="text-center">3 New</p>
+                                                    <p class="tertiary text-center">User Tickets</p>
+                                                </div>
+                                                <div class="message__single">
+                                                    <p class="tertiary text-center mb-20">There are no open tickets</p>
+                                                    <h6 class="text-center">Do you need help?</h6>
+                                                    <a href="#">Create a new tickets</a>
+                                                </div>
+                                                <div class="mark__read">
+                                                    <a href="#">View All Tickets</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="notifications">
+                                            <a href="javascript:void(0)" class="icon__wrapper">
+                                                <i class="fas fa-bell"></i>
+                                                <span>03</span>
+                                            </a>
+                                            <div class="notification__wrapper">
+                                                <div class="notification__head">
+                                                    <p class="text-center">3 New</p>
+                                                    <p class="tertiary text-center">Notification</p>
+                                                </div>
+                                                <div class="notification__single">
+                                                    <a href="#">
+                                                        <h6>Welcome to spoment</h6>
+                                                        <p class="tertiary">We are happy to welcome you to our community spoment.</p>
+                                                    </a>
+                                                    <p class="tertiary time">2 hours ago</p>
+                                                </div>
+                                                <div class="mark__read">
+                                                    <a href="#">Mark all as read</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <select class="language-select">
+                                            <option value="english">En</option>
+                                            <option value="australia">Aus</option>
+                                            <option value="brazil">Bra</option>
+                                            <option value="argentina">Arg</option>
+                                        </select>
+                                        <div class="profile__meta">
+                                            <a href="javascript:void(0)" class="profile__small">
+                                                <img src="{{ asset('assets/images/avatar.png') }}" alt="Profile Image" />
+                                            </a>
+                                            <div class="profile__info">
+                                                <div class="profile__info__head">
+                                                    <div>
+                                                        <img src="{{ asset('assets/images/avatar.png') }}" alt="User" />
+                                                    </div>
+                                                    <div class="profile__head__content">
+                                                        <a href="/Authorized/User-Settings">{{ Auth::user()->name }}</a>
+                                                        <p class="tertiary"><a href="/cdn-cgi/l/email-protection" class="__cf_email__">{{ Auth::user()->email }}</a></p>
+                                                    </div>
+                                                </div>
+                                                <a href="/Authorized/User-Settings">Personal Info</a>
+                                                <a href="/Authorized/User-Settings">Payout Settings</a>
+                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                                <form id="logout-form" method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
+                                @endif
+                            @else
+                                <div class="nav__group__btn">
+                                    <a href="{{ route('login') }}" class="button active__btn d-none d-sm-block"> Log In </a>
+                                    <a href="{{ route('register') }}" class="button d-none d-sm-block"> Sign Up </a>
                                 </div>
-                                <a href="/Authorized/User-Settings">Personal Info</a>
-                                <a href="/Authorized/User-Settings">Payout Settings</a>
-                                <a href="#">Logout</a>
-                            </div>
-                        </div>
-                    </div>
+                            @endif
+                        @endif
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNav"
                         aria-controls="primaryNav" aria-expanded="false" aria-label="Toggle Primary Nav">
                         <span class="icon-bar top-bar"></span>

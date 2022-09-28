@@ -95,55 +95,55 @@
     });
 
     // range slider
-    $(".range__slider").on("input", function () {
-      $("#investAmount").val($(this).val());
-      $(".range__output__value").html($(this).val());
-      $("#dailyProfit").html(((($(this).val() * 35) / 100) * 1).toFixed(4));
-      $("#totalProfit").html(((($(this).val() * 35) / 100) * 30).toFixed(4));
-    });
+    // $(".range__slider").on("input", function () {
+    //   $("#investAmount").val($(this).val());
+    //   $(".range__output__value").html($(this).val());
+    //   $("#dailyProfit").html(((($(this).val() * 35) / 100) * 1).toFixed(4));
+    //   $("#totalProfit").html(((($(this).val() * 35) / 100) * 30).toFixed(4));
+    // });
 
-    $("#investAmount").on("input", function (e) {
-      if (this.value > 1000 || this.value < 1) {
-        $("#investAmount").val(1000);
-        alert("Value should be between 1 - 1000");
-        return false;
-      }
+    // $("#investAmount").on("input", function (e) {
+    //   if (this.value > 1000 || this.value < 1) {
+    //     $("#investAmount").val(1000);
+    //     alert("Value should be between 1 - 1000");
+    //     return false;
+    //   }
 
-      $(".range__slider").val($(this).val());
-      $(".range__output__value").html($(this).val());
-      $("#dailyProfit").html(((($(this).val() * 35) / 100) * 1).toFixed(4));
-      $("#totalProfit").html(((($(this).val() * 35) / 100) * 30).toFixed(4));
-    });
+    //   $(".range__slider").val($(this).val());
+    //   $(".range__output__value").html($(this).val());
+    //   $("#dailyProfit").html(((($(this).val() * 35) / 100) * 1).toFixed(4));
+    //   $("#totalProfit").html(((($(this).val() * 35) / 100) * 30).toFixed(4));
+    // });
 
-    $("#dailyProfit").html(function () {
-      $("#dailyProfit").html(
-        ((($(".range__slider").val() * 35) / 100) * 1).toFixed(4)
-      );
-    });
+    // $("#dailyProfit").html(function () {
+    //   $("#dailyProfit").html(
+    //     ((($(".range__slider").val() * 35) / 100) * 1).toFixed(4)
+    //   );
+    // });
 
-    $("#totalProfit").html(function () {
-      $("#totalProfit").html(
-        ((($(".range__slider").val() * 35) / 100) * 30).toFixed(4)
-      );
-    });
+    // $("#totalProfit").html(function () {
+    //   $("#totalProfit").html(
+    //     ((($(".range__slider").val() * 35) / 100) * 30).toFixed(4)
+    //   );
+    // });
 
-    $("#investAmount").on("input", function (e) {
-      document.querySelectorAll(".range__slider").forEach(function (el) {
-        el.oninput = function () {
-          var valPercent =
-            (el.valueAsNumber - parseInt(el.min)) /
-            (parseInt(el.max) - parseInt(el.min));
-          var style =
-            "background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(" +
-            valPercent +
-            ", #13d487), color-stop(" +
-            valPercent +
-            ", #6c4edd));";
-          el.style = style;
-        };
-        el.oninput();
-      });
-    });
+    // $("#investAmount").on("input", function (e) {
+    //   document.querySelectorAll(".range__slider").forEach(function (el) {
+    //     el.oninput = function () {
+    //       var valPercent =
+    //         (el.valueAsNumber - parseInt(el.min)) /
+    //         (parseInt(el.max) - parseInt(el.min));
+    //       var style =
+    //         "background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(" +
+    //         valPercent +
+    //         ", #13d487), color-stop(" +
+    //         valPercent +
+    //         ", #6c4edd));";
+    //       el.style = style;
+    //     };
+    //     el.oninput();
+    //   });
+    // });
 
     // range slider fill background
     document.querySelectorAll(".range__slider").forEach(function (el) {

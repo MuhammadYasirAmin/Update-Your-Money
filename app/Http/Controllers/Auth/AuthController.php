@@ -36,13 +36,12 @@ class AuthController extends Controller
         if ($user) {
             if (Hash::check($request->Log_Pass, $user->password)) {
                 $token = $user->createToken('LoginToken')->accessToken;
-                // dd(Auth::user()->utype);
+                
                 if (Auth::user()->utype == 'ADM') {
                     return redirect()->route('Admin.Dashboard');
                 } else {
                     return redirect()->route('User.Dashboard');
                 }
-                return back()->with('User_Login', 'Admin Not Found');
 
             // return back()->with('User_Login', 'User Login Successfully!');
             } else {

@@ -29,6 +29,14 @@
                 </div>
             </div>
             <div class="col-md-3">
+                <label for="PlanProfit" class="form-label">Plan Profit</label>
+                <input type="number" class="form-control" id="PlanProfit" name="PlanProfit"
+                    placeholder="e.g => 110% Plan" required>
+                <div class="invalid-feedback">
+                    Enter Plan Profit!
+                </div>
+            </div>
+            <div class="col-md-3">
                 <label for="MinDeposit" class="form-label">Min Deposit</label>
                 <input type="number" class="form-control" id="MinDeposit" name="MinDeposit" placeholder="e.g => $10"
                     required>
@@ -69,7 +77,7 @@
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="assets/js/pages/datatables.init.js"></script>
-<div class="row">
+<div class="row pt-lg-5">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
@@ -102,6 +110,7 @@
                                     <tr>
                                         <th class="sorting" style="width: 33.4px;">SR No.</th>
                                         <th class="sorting" style="width: 33.4px;">Plan Title</th>
+                                        <th class="sorting" style="width: 33.4px;">Plan Profit</th>
                                         <th class="sorting" style="width: 33.4px;">Min Deposite</th>
                                         <th class="sorting" style="width: 33.4px;">Max Deposite</th>
                                         <th class="sorting" style="width: 33.4px;">Ref Deposit</th>
@@ -109,13 +118,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd">
-                                        <td class="sorting" style="width: 33.4px;">Ref Deposit</td>
-                                        <td class="sorting" style="width: 33.4px;">Ref Deposit</td>
-                                        <td class="sorting" style="width: 33.4px;">Ref Deposit</td>
-                                        <td class="sorting" style="width: 33.4px;">Ref Deposit</td>
-                                        <td class="sorting" style="width: 33.4px;">Ref Deposit</td>
-                                    </tr>
+                                    @foreach ($InvestmentPlan as $plan)
+                                        <tr class="odd">
+                                            <td class="sorting" style="width: 33.4px;">{{ $plan->id }}</td>
+                                            <td class="sorting" style="width: 33.4px;">{{ $plan->PlanTitle }}</td>
+                                            <td class="sorting" style="width: 33.4px;">{{ $plan->PlanProfit }}</td>
+                                            <td class="sorting" style="width: 33.4px;">{{ $plan->MinDeposit }}</td>
+                                            <td class="sorting" style="width: 33.4px;">{{ $plan->MaxDeposit }}</td>
+                                            <td class="sorting" style="width: 33.4px;">{{ $plan->RefDeposit }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

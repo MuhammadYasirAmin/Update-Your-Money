@@ -40,21 +40,21 @@ Route::get('/Support/Contact-Us', ContactPage::class);
 Route::get('/Investment-Plan', InvestmentPage::class);
 Route::get('/Referal-Program', AffilatePage::class);
 
-// Route::get('/Authentication/LoginForm', LoginForm::class)->name('login');
+Route::get('/Authentication/LoginForm', LoginForm::class)->name('login');
 
-// Route::post('/Authentication/LoginForm/Login-Submit', [
-//     AuthController::class,
-//     'loginSubmit',
-// ])->name('login.post');
+Route::post('/Authentication/LoginForm/Login-Submit', [
+    AuthController::class,
+    'loginSubmit',
+])->name('login.post');
 
-// Route::get('/Authentication/Registeration', RegisterForm::class)->name(
-//     'register'
-// );
+Route::get('/Authentication/Registeration', RegisterForm::class)->name(
+    'register'
+);
 
-// Route::post('/Authentication/Registeration/Register-Submit', [
-//     AuthController::class,
-//     'registerSubmit',
-// ])->name('register.post');
+Route::post('/Authentication/Registeration/Register-Submit', [
+    AuthController::class,
+    'registerSubmit',
+])->name('register.post');
 
 // Route::get('/Authentication/LogOut', [AuthController::class, 'logout'])->name(
 //     'logout'
@@ -92,6 +92,10 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
 
     Route::get('/Authorized/Admin-Investment-Plan-Add', InvestmentPlan::class)->name(
         'Admin.Investment'
+    );
+
+    Route::post('/Authorized/Admin-Investment-Plan-Add', [InvestmentPlan::class, 'submitPlans'])->name(
+        'Admin.Investment.Post'
     );
 });
 

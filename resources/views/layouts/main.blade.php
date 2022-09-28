@@ -230,7 +230,7 @@
                                                         <p class="tertiary"><a href="/cdn-cgi/l/email-protection" class="__cf_email__">{{ Auth::user()->email }}</a></p>
                                                     </div>
                                                 </div>
-                                                <a href="/Authorized/User-Settings">Personal Info</a>
+                                                <a href="/Authorized/User-Dashboard">Dashboard</a>
                                                 <a href="/Authorized/User-Settings">Payout Settings</a>
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                                 <form id="logout-form" method="POST" action="{{ route('logout') }}">
@@ -393,6 +393,7 @@
     <script src="{{ asset('assets/js/plugin.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/investment.js') }}"></script>
 
 </body>
 

@@ -16,6 +16,7 @@ class CreateInvestmentPlansTable extends Migration
         Schema::create('investment_plans', function (Blueprint $table) {
             $table->id();
             $table->string('PlanTitle');
+            $table->string('PlanProfit');
             $table->bigInteger('MinDeposit')->unsigned();
             $table->bigInteger('MaxDeposit')->unsigned();
             $table->bigInteger('RefDeposit')->unsigned();

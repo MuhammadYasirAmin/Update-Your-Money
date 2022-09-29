@@ -75,6 +75,7 @@
                             </div>
                         </div>
                     @endforeach
+                    <input hidden type="text" id="PlanSelected" value="">
                 </div>
             </div>
         </fieldset>

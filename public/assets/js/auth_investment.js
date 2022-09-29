@@ -9,9 +9,8 @@ $(document).ready(function () {
         ) {
             var checkboxPlan = $(this).find("input[type=checkbox]");
             checkboxPlan.prop("checked", true);
-            // console.log(parseFloat($(checkboxPlan).val()));
-            percent = checkboxPlan.value;
-            console.log(percent);
+            console.log($(checkboxPlan).val());
+            $("#PlanSelected").val($(checkboxPlan).val());
         }
     });
 

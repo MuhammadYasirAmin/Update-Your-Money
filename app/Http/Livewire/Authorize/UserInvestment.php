@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User\DepositModel;
+use App\Models\User\InvestmentPlanModel;
 
 class UserInvestment extends Component
 {

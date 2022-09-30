@@ -51,15 +51,14 @@ Route::get('/Authentication/Registeration', RegisterForm::class)->name(
     'register'
 );
 
-Route::get('/{UserId}/{UserName}/Authentication/Registeration', RegisterForm::class)->name(
-    'user.Referal'
-);
-
-
 Route::post('/Authentication/Registeration/Register-Submit', [
     AuthController::class,
     'registerSubmit',
 ])->name('register.post');
+
+Route::get('/{UserId}/{UserName}/Authentication/Registeration', RegisterForm::class)->name(
+    'user.Referal'
+);
 
 Route::post('/{UserId}/{UserName}/Authentication/Registeration/Register-Submit', [
     AuthController::class,

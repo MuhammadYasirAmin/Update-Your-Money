@@ -14,4 +14,19 @@ class DepositModel extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // public function amountDeposit()
+    // {
+    //     return $this->hasMany(DepositeAmount::class);
+    // }
+
+    // public function userTransacrtion()
+    // {
+    //     return $this->hasMany(TransactionHistory::class);
+    // }
+
+    // public function financialLog()
+    // {
+    //     return $this->hasMany(FinancialLogs::class);
+    // }
 }

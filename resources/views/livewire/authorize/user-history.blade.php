@@ -37,62 +37,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-d0</td>
-                    </tr>
-                    <tr>
-                        <td>2022.01.02 11:47:57 am</td>
-                        <td><img src="{{ asset('assets/images/transaction/btc.png') }}" alt="Bitcoin" />
-                            Bitcoin</td>
-                        <td>-$300.00</td>
-                        <td>b4e70bcd-302e-44ef-8b11-dt0</td>
-                    </tr>
+                    @if (count($TransactionHistory) > 0)
+                        @foreach ($TransactionHistory as $logs)
+                            <tr>
+                                <td>{{ $logs->created_at }}</td>
+                                <td>
+                                    <img src="{{ asset('assets/images/transaction/btc.png') }}" alt="USD Dollar" />
+                                </td>
+                                @if ($logs->TransactionType == 'Deposit')
+                                    <td>
+                                        <h6 style="color: #4ade80;">${{ $logs->Amount }}.00</h6>
+                                    </td>
+                                @else
+                                    <td>
+                                        <h6 style="color: #ffb1b1;">-${{ $logs->Amount }}.00</h6>
+                                    </td>
+                                @endif
+                                <td>{{ $logs->WalletAddress }} </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td style="text-align:center;" colspan="5">You don't have any Logs</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

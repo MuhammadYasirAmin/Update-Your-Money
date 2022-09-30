@@ -7,6 +7,9 @@ use App\Models\Backend\InvestmentPlanModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User\DepositModel;
+use App\Models\User\DepositeAmount;
+use App\Models\User\FinancialLogs;
+use App\Models\User\TransactionHistory;
 
 class UserDeposit extends Component
 {
@@ -24,12 +27,12 @@ class UserDeposit extends Component
         if (Auth::check()) {
             $UserDeposit = new DepositModel();
             $UserDeposit->investAmount = $request->investAmount;
-            $UserDeposit->PlanSelected = $request->PlanSelected;
             $UserDeposit->selectedCurrency = $request->selectedCurrency;
 
             $TotalProfit = 0;
             $TotalPercent = 0;
             $money = $request->investAmount;
+            $SelectedPlan = null;
 
             switch ($request->PlanSelected) {
                 case 1:
@@ -38,7 +41,7 @@ class UserDeposit extends Component
                         $TotalProfit = intval($money / 100 * 110);
                         $TotalPercent = 110;
                     }
-
+                    $SelectedPlan = "110% Plan (48 Hr.)";
                     break;
                 case 2:
 
@@ -46,6 +49,7 @@ class UserDeposit extends Component
                         $TotalProfit = intval($money / 100 * 112);
                         $TotalPercent = 112;
                     }
+                    $SelectedPlan = "112% Plan (48 Hr.)";
 
                     break;
                 case 3:
@@ -81,7 +85,7 @@ class UserDeposit extends Component
                         $TotalProfit = intval($money / 100 * 500 * 1 + $money);
                         $TotalPercent = 1;
                     }
-
+                    $SelectedPlan = "No Plan Selected";
                     break;
             }
 
@@ -89,10 +93,34 @@ class UserDeposit extends Component
             $UserDeposit->UID = $UID;
             $UserDeposit->TotalProfit = $TotalProfit;
             $UserDeposit->TotalPercent = $TotalPercent;
+            $UserDeposit->PlanSelected = $SelectedPlan;
+
 
             if ($UserDeposit->save()) {
-                return redirect()->route('User.Dashboard')
-                        ->with('Done', 'OK');
+                $DepositAmount = new DepositeAmount();
+                $DepositAmount->UID = $UID;
+                $DepositAmount->Amount = $money;
+                if ($DepositAmount->save()) {
+                    $TransactionHistory = new TransactionHistory();
+                    $TransactionHistory->UID = $UID;
+                    $TransactionHistory->Amount = $money;
+                    $TransactionHistory->PaymentMethod = $request->selectedCurrency;
+                    $TransactionHistory->TransactionType = 'Deposite';
+                    $TransactionHistory->WalletAddress = 'b4e70bcd-302e-44ef-8b11-d0';
+                    if ($TransactionHistory->save()) {
+                        $FinancialLog = new FinancialLogs();
+                        $FinancialLog->UID = $UID;
+                        $FinancialLog->Amount = $money;
+                        $FinancialLog->PaymentMethod = $request->selectedCurrency;
+                        $FinancialLog->TransactionType = 'Deposite';
+                        $FinancialLog->Description = 'Scheduled Investment plan';
+
+                        if ($FinancialLog->save()) {
+                            return redirect()->route('User.Dashboard')
+                                                                            ->with('Done', 'OK');
+                        }
+                    }
+                }
             }
         }
     }

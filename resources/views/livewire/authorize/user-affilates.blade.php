@@ -16,8 +16,8 @@
                 <div class="affiliate__link column__space">
                     <h5>Your Affiliate Link</h5>
                     <div class="copy">
-                        <p>{{ url() }}</p>
-                        <a href="javascript:void(0)" class="button">Copy link</a>
+                        <p style="overflow: hidden;" id="referal-link">{{ url('/' . Auth::user()->id . '/' . Auth::user()->name . '/Authentication/Registeration') }}</p>
+                        <a href="javascript:void(0)" onclick="referalLink();" class="button">Copy link</a>
                     </div>
                 </div>
             </div>

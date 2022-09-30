@@ -15,15 +15,15 @@ class Dashboard extends Component
             $UID = Auth::user()->id;
 
             $TotalBalance =
-DB::table('deposit_models')
+DB::table('deposite_amounts')
     ->where('UID', '=', $UID)
-    ->select('investAmount')
-    ->sum('investAmount');
+    ->select('Amount')
+    ->sum('Amount');
 
             $Deposit = DB::table('deposit_models')->where('UID', '=', $UID)->orderBy('id', 'DESC')->first();
-            $LastDeposit = $Deposit->investAmount;
-            $TotalBalance? $TotalBalance : 0;
-            $LastDeposit? $LastDeposit : 0;
+            $LastDeposit = $Deposit ? $Deposit->investAmount : 0;
+            $TotalBalance ? $TotalBalance : 0;
+            $LastDeposit ? $LastDeposit : 0;
             return view('livewire.authorize.dashboard', compact('TotalBalance', 'LastDeposit'))->layout(
                 'layouts.panel'
             );

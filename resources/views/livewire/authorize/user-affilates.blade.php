@@ -16,7 +16,7 @@
                 <div class="affiliate__link column__space">
                     <h5>Your Affiliate Link</h5>
                     <div class="copy">
-                        <p>https://Spoment.net/?ref=Jeffrey Morgan</p>
+                        <p>{{ url() }}</p>
                         <a href="javascript:void(0)" class="button">Copy link</a>
                     </div>
                 </div>

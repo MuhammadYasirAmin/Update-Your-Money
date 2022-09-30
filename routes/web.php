@@ -51,10 +51,21 @@ Route::get('/Authentication/Registeration', RegisterForm::class)->name(
     'register'
 );
 
+Route::get('/{UserId}/{UserName}/Authentication/Registeration', RegisterForm::class)->name(
+    'user.Referal'
+);
+
+
 Route::post('/Authentication/Registeration/Register-Submit', [
     AuthController::class,
     'registerSubmit',
 ])->name('register.post');
+
+Route::post('/{UserId}/{UserName}/Authentication/Registeration/Register-Submit', [
+    AuthController::class,
+    'referalRegisterSubmit',
+])->name('referal.register.post');
+
 
 // Route::get('/Authentication/LogOut', [AuthController::class, 'logout'])->name(
 //     'logout'
@@ -108,6 +119,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/Authorized/User-History', UserHistory::class);
     Route::get('/Authorized/User-Wallet', UserWallets::class);
     Route::get('/Authorized/User-Deposit', UserDeposit::class);
+    Route::post('/Authorized/User-Deposit', [UserDeposit::class, 'UserDeposit'])->name('User.Deposit');
     Route::get('/Authorized/User-Withdrawal', UserWithdrawal::class);
     Route::get('/Authorized/User-Investment', UserInvestment::class);
     Route::get('/Authorized/User-Affilates', UserAffilates::class);

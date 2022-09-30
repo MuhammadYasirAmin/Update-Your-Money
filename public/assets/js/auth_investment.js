@@ -1,26 +1,11 @@
 $(document).ready(function () {
 
-    var percent = 0;
-    $(".checkbox__investment__plan").on("click", function (e) {
-        if (
-            $(".checkbox__investment__plan").hasClass(
-                "checkbox__investment__plan__active"
-            )
-        ) {
-            var checkboxPlan = $(this).find("input[type=checkbox]");
-            checkboxPlan.prop("checked", true);
-            console.log($(checkboxPlan).val());
-            $("#PlanSelected").val($(checkboxPlan).val());
-        }
-    });
-
-    console.log(percent);
     var minMoney = [25, 25.00, 1000.00, 50.00, 100.00];
     var maxMoney = [5001.00, 5001.00, 8001.00, 5001.00, 5001.00];
     $("#investAmount").val(minMoney[0]);
     // console.log($("#investAmount").val(minMoney[0]));
     //Calculator
-    function calc() {
+    function calc(percent) {
         var money = parseFloat($("#investAmount").val());
         switch (percent) {
             case 0:
@@ -38,7 +23,8 @@ $(document).ready(function () {
                     $("#totalProfit").text('$' + profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
-
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
                     // updateSlider(money, profitDaily, profitTotal);
 
                     //} else if(isNaN(money) == true) {
@@ -71,6 +57,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 10) {
                     $("#dailyProfit").text("Min: $10");
@@ -101,6 +89,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 101) {
                     $("#dailyProfit").text("Min: $101");
@@ -131,6 +121,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 501) {
                     $("#dailyProfit").text("Min: $501");
@@ -161,6 +153,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 1001) {
                     $("#dailyProfit").text("Min: $1001");
@@ -192,6 +186,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
                     //} else if(isNaN(money) == true) {
                 } if (money < 5001) {
                     $("#dailyProfit").text("Min: $5001");
@@ -216,6 +212,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 10001) {
                     $("#dailyProfit").text("Min: $10001");
@@ -240,6 +238,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 25001) {
                     $("#dailyProfit").text("Min: $25001");
@@ -264,6 +264,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 50001) {
                     $("#dailyProfit").text("Min: $50001");
@@ -288,6 +290,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 5000) {
                     $("#dailyProfit").text("Min: $5000");
@@ -312,6 +316,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money >= 1001 && money <= 3000) {
                     var profitDaily = money / 100 * 950 / 70;
@@ -323,11 +329,12 @@ $(document).ready(function () {
                     var profitNet = money / 100 * 950 - money;
                     var profitNet = profitNet.toFixed(2);
 
-
                     $("#dailyProfit").text(profitDaily);
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money >= 3001 && money < 9999999999) {
                     var profitDaily = money / 100 * 1000 / 70;
@@ -343,6 +350,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
                 } if (money < 20) {
                     $("#dailyProfit").text("Min: $20");
                     $("#totalProfit").text("Min: $20");
@@ -366,6 +375,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money >= 1001 && money <= 3000) {
                     var profitDaily = money / 100 * 1900 / 120;
@@ -381,6 +392,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money >= 3001 && money < 9999999999) {
                     var profitDaily = money / 100 * 2000 / 120;
@@ -396,6 +409,8 @@ $(document).ready(function () {
                     $("#totalProfit").text(profitTotal);
                     $("#profitPercent").text(profitPercent + '%');
                     $("#profitNet").text('$' + profitNet);
+                    $("#TotalProfit").val(profitTotal);
+                    $("#TotalPercent").val(profitPercent);
 
                 } if (money < 10) {
                     $("#dailyProfit").text("Min: $10");
@@ -407,17 +422,31 @@ $(document).ready(function () {
 
         }
     }
-    if ($("#investAmount").length) {
-        calc();
-    }
-    $("#investAmount").keyup(function () {
-        calc();
+
+    $(".checkbox__investment__plan").on("click", function (e) {
+        if (
+            $(".checkbox__investment__plan").hasClass(
+                "checkbox__investment__plan__active"
+            )
+        ) {
+            var checkboxPlan = $(this).find("input[type=checkbox]");
+            checkboxPlan.prop("checked", true);
+            var checkboxValue = parseFloat($(checkboxPlan).val());
+            console.log(checkboxValue);
+            calc(checkboxValue);
+        }
+        if ($("#investAmount").length) {
+            calc(checkboxValue);
+        }
+        $("#investAmount").keyup(function () {
+            calc(checkboxValue);
+        });
     });
 
-    $("#selectPlan").on('change', function () {
-        percent = parseFloat(this.value);
-        calc();
-    })
+    // $("#PlanSelected").on('change', function () {
+    //     percent = parseFloat(this.value);
+    //     calc();
+    // })
 
 
 

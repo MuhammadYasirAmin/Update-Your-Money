@@ -12,6 +12,7 @@ use App\Models\UserVerify;
 use Hash;
 use Illuminate\Support\Str;
 use Mail;
+use App\Models\User\DepositModel;
 
 class AuthController extends Controller
 {
@@ -36,7 +37,7 @@ class AuthController extends Controller
         if ($user) {
             if (Hash::check($request->Log_Pass, $user->password)) {
                 $token = $user->createToken('LoginToken')->accessToken;
-                
+
                 if (Auth::user()->utype == 'ADM') {
                     return redirect()->route('Admin.Dashboard');
                 } else {
@@ -74,6 +75,104 @@ class AuthController extends Controller
         $user->save();
 
         return back()->with('User_Registerd', 'User Registerd Successfully!');
+    }
+
+    public function referalRegisterSubmit(Request $request)
+    {
+        $UserId = $request->UserId;
+        $UserName = $request->UserName;
+
+        $validator = Validator::make($request->all(), [
+            'Reg_Email' => 'required|email',
+            'Reg_Name' => 'required',
+            'Reg_Phone' => 'required',
+            'Reg_Pass' => 'required|min:6|max:12',
+            'Reg_CPass' => 'required|same:Reg_Pass|min:6|max:12',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('User_Not_Registerd', 'User Not Registerd Successfully!');
+        }
+
+        $user = new User();
+        $user->email = $request->Reg_Email;
+        $user->name = $request->Reg_Name;
+        $user->userRef = $UserName;
+        $user->user_phoneNumber = $request->Reg_Phone;
+        $user->password = bcrypt($request->Reg_Pass);
+        if ($user->save()) {
+            $UserDeposit = new DepositModel();
+            $UserDeposit->investAmount = $request->investAmount;
+            $UserDeposit->PlanSelected = $request->PlanSelected;
+            $UserDeposit->selectedCurrency = $request->selectedCurrency;
+
+            $TotalProfit = 0;
+            $TotalPercent = 0;
+            $money = $request->investAmount;
+
+            switch ($request->PlanSelected) {
+                case 1:
+
+                    if ($money >= 10 && $money <= 100) {
+                        $TotalProfit = intval($money / 100 * 110);
+                        $TotalPercent = 110;
+                    }
+
+                    break;
+                case 2:
+
+                    if ($money >= 101 && $money <= 500) {
+                        $TotalProfit = intval($money / 100 * 112);
+                        $TotalPercent = 112;
+                    }
+
+                    break;
+                case 3:
+                    # code...
+                    break;
+                case 4:
+                    # code...
+                    break;
+                case 5:
+                    # code...
+                    break;
+                case 6:
+                    # code...
+                    break;
+                case 7:
+                    # code...
+                    break;
+                case 8:
+                    # code...
+                    break;
+                case 9:
+                    # code...
+                    break;
+                case 10:
+                    # code...
+                    break;
+                case 11:
+                    # code...
+                    break;
+                default:
+
+                    if (($money >= 10 && $money < 999)) {
+                        $TotalProfit = intval($money / 100 * 500 * 1 + $money);
+                        $TotalPercent = 1;
+                    }
+
+                    break;
+            }
+
+            $UID = $UserId;
+            $UserDeposit->UID = $UID;
+            $UserDeposit->TotalProfit = $TotalProfit;
+            $UserDeposit->TotalPercent = $TotalPercent;
+
+            if ($UserDeposit->save()) {
+                return back()->with('User_Registerd', 'User Registerd Successfully!');
+            }
+        }
     }
 
     public function logout()

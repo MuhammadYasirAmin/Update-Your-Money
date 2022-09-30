@@ -9,7 +9,7 @@
     <div class="open__deposit">
         <h5>Open Deposit</h5>
     </div>
-    <form action="#" method="POST" id="depositForm" class="actionForm">
+    <form action="{{ route('User.Deposit') }}" method="POST" id="depositForm" class="actionForm">
         @csrf
         <fieldset class="group">
             <p class="legen legen__active">Select Payment System</p>
@@ -19,7 +19,7 @@
                         <div class="payment__system__checkbox__single">
                             <label for="withspoment" class="check_wrap">
                                 <input type="checkbox" required="required" class="pay__system__check"
-                                    id="withspoment" value="USD Dollar" />
+                                    id="withspoment" name="selectedCurrency" value="USD Dollar" />
                                 <span class="checkmark"></span>
                             </label>
                             <div class="pay__system">
@@ -46,7 +46,7 @@
                         <div class="col-lg-6">
                             <div class="checkbox__investment__plan">
                                 <label for="spo-10" class="check_wrap_plan">
-                                    <input type="checkbox" class="pay__system__check__plan" id="spo-{{ $plan->id }}" value="{{ $plan->id }}" />
+                                    <input type="checkbox" class="pay__system__check__plan" name="PlanSelected" id="spo-{{ $plan->id }}" value="{{ $plan->id }}" />
                                     <span class="checkmark"></span>
                                 </label>
                                 <div class="investment__item" style="margin-top: 0px;">
@@ -75,7 +75,6 @@
                             </div>
                         </div>
                     @endforeach
-                    <input hidden type="text" id="PlanSelected" value="">
                 </div>
             </div>
         </fieldset>
@@ -85,7 +84,7 @@
                 <div class="plan__select">
                     <label class="secondary content__space--extra--small">Enter The
                         amount</label>
-                    <input type="number" name="amount" id="investAmount" required="required"
+                    <input type="number" name="investAmount" id="investAmount" required="required"
                         placeholder="ENTER INVESTMENT AMOUNT (USD)" value="25" min="0" />
                 </div>
                 <div class="row cta__space">

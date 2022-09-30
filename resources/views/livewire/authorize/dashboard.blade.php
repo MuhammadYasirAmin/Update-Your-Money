@@ -16,10 +16,10 @@
                     </div>
                     <div class="balance__content">
                         <p>Total Balance</p>
-                        <h5>$800.00</h5>
+                        <h5>${{ $TotalBalance }}.00</h5>
                         <div class="last__action">
                             <p class="tertiary">Last Deposit:</p>
-                            <p class="tertiary">$100.00</p>
+                            <p class="tertiary">${{ intval($LastDeposit) }}.00</p>
                         </div>
                         <a href="/Authorized/User-Investment" class="button">Make New Deposit</a>
                     </div>
@@ -98,8 +98,10 @@
                 <div class="affiliate__link column__space">
                     <h5>Your Affiliate Link</h5>
                     <div class="copy">
-                        <p>https://Spoment.net/?ref=Jeffrey Morgan</p>
-                        <a href="javascript:void(0)" class="button">Copy link</a>
+                        <p style="overflow: hidden;" id="referal-link">
+                            {{ url('/' . Auth::user()->id . '/' . Auth::user()->name . '/Authentication/Registeration') }}
+                        </p>
+                        <a href="javascript:void(0)" onclick="referalLink();" class="button">Copy link</a>
                     </div>
                 </div>
             </div>
@@ -147,3 +149,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function referalLink() {
+
+        const body = document.querySelector('body');
+        const paragraph = document.querySelector('p#referal-link');
+        const area = document.createElement('textarea');
+        body.appendChild(area);
+
+        area.value = paragraph.innerText;
+        area.select();
+        document.execCommand('copy');
+        alert('Your Referral Link Copied.');
+
+        body.removeChild(area);
+    }
+</script>

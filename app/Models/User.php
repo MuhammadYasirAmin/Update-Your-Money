@@ -58,4 +58,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function UserDeposit()
+    {
+        return $this->hasMany(DepositModel::class);
+    }
 }

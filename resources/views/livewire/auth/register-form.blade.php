@@ -20,7 +20,7 @@
         <div class="register__area">
             <h3 class="content__space--small text-center">Become a New Investor</h3>
             <p class="text-center mb-55">Become one of our investors and start making money</p>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register.post') }}">
                 @csrf
                 <div class="input__grp content__space">
                     <div class="row d-flex align-items-start">

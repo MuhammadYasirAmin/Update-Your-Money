@@ -105,14 +105,14 @@ class UserDeposit extends Component
                     $TransactionHistory->UID = $UID;
                     $TransactionHistory->Amount = $money;
                     $TransactionHistory->PaymentMethod = $request->selectedCurrency;
-                    $TransactionHistory->TransactionType = 'Deposite';
+                    $TransactionHistory->TransactionType = 'Deposit';
                     $TransactionHistory->WalletAddress = 'b4e70bcd-302e-44ef-8b11-d0';
                     if ($TransactionHistory->save()) {
                         $FinancialLog = new FinancialLogs();
                         $FinancialLog->UID = $UID;
                         $FinancialLog->Amount = $money;
                         $FinancialLog->PaymentMethod = $request->selectedCurrency;
-                        $FinancialLog->TransactionType = 'Deposite';
+                        $FinancialLog->TransactionType = 'Deposit';
                         $FinancialLog->Description = 'Scheduled Investment plan';
 
                         if ($FinancialLog->save()) {

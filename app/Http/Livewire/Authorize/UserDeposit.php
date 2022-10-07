@@ -106,7 +106,7 @@ class UserDeposit extends Component
                     $TransactionHistory->Amount = $money;
                     $TransactionHistory->PaymentMethod = $request->selectedCurrency;
                     $TransactionHistory->TransactionType = 'Deposit';
-                    $TransactionHistory->WalletAddress = 'b4e70bcd-302e-44ef-8b11-d0';
+                    $TransactionHistory->WalletAddress = 'b4e70bcd-302e-44ef-8b11-'.$UID;
                     if ($TransactionHistory->save()) {
                         $FinancialLog = new FinancialLogs();
                         $FinancialLog->UID = $UID;
@@ -116,8 +116,7 @@ class UserDeposit extends Component
                         $FinancialLog->Description = 'Scheduled Investment plan';
 
                         if ($FinancialLog->save()) {
-                            return redirect()->route('User.Dashboard')
-                                                                            ->with('Done', 'OK');
+                            return redirect()->route('User.Dashboard')->with('Done', 'OK');
                         }
                     }
                 }

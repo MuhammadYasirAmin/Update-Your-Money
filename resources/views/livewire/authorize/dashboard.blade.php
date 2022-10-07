@@ -32,10 +32,10 @@
                     </div>
                     <div class="balance__content">
                         <p>Total Earned</p>
-                        <h5>$800.00</h5>
+                        <h5>${{ $TotalEarned }}.00</h5>
                         <div class="last__action">
                             <p class="tertiary">Last Withdrawal:</p>
-                            <p class="tertiary">$100.00</p>
+                            <p class="tertiary">${{ intval($LastWithdraw) }}.00</p>
                         </div>
                         <a href="/Authorized/User-Investment" class="button">Withdraw Funds</a>
                     </div>

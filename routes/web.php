@@ -120,6 +120,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/Authorized/User-Deposit', UserDeposit::class);
     Route::post('/Authorized/User-Deposit', [UserDeposit::class, 'UserDeposit'])->name('User.Deposit');
     Route::get('/Authorized/User-Withdrawal', UserWithdrawal::class);
+    Route::post('/Authorized/User-Withdrawal', [UserWithdrawal::class, 'UserWithdrawal'])->name('User.Withdraw');
     Route::get('/Authorized/User-Investment', UserInvestment::class);
     Route::get('/Authorized/User-Affilates', UserAffilates::class);
 });
